@@ -1,3 +1,6 @@
 [submodule "pifuhd"]
 	path = pifuhd
 	url = https://github.com/facebookresearch/pifuhd
+[submodule "openpose"]
+	path = openpose
+	url = https://github.com/CMU-Perceptual-Computing-Lab/openpose
