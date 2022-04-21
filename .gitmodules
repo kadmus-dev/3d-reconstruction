@@ -1,0 +1,3 @@
+[submodule "pifuhd"]
+	path = pifuhd
+	url = https://github.com/facebookresearch/pifuhd
