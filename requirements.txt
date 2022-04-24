@@ -2,4 +2,13 @@ wheel
 wget
 matplotlib
 -r lhpe/requirements.txt
--r pifuhd/requirements.txt
+# -r pifuhd/requirements.txt
+torch
+torchvision
+Pillow                # PIL
+scikit-image==0.18.3  #skimage
+tqdm
+opencv-python         # cv2
+trimesh
+PyOpenGL
+ffmpeg
