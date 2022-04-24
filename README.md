@@ -1,17 +1,23 @@
 # 3d-reconstruction
 
 
-## На всякий случай работа с сабмодулями
+## Cloning
 
-Для того чтобы склонировать проект с сабмодулями(т.е. этот)
-
-```
+To clone this repository AND its submodules - run the following command:
+```bash
 git clone --recurse-submodules git@github.com:kadmus-dev/3d-reconstruction.git
 ```
 
-Если оказалось так что надо ДОБАВИТЬ сабмодули(забыли `--recurse-submodules` или чекаутнулись в ветку с новыми сабмодулями) - выполняем следующее
-
-```
+If your submodule folders are empty(e.g. you forgot `--recurse-submodules` or checkouted to a branch with new submodules) - run:
+```bash
 git submodule init
 git submodule update
+```
+
+## Dependencies
+Because of pip quirks - to install with thw following command:
+```bash
+pip install cython
+pip install numpy
+pip install -r requirements.txt
 ```
