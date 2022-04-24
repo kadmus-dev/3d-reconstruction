@@ -1,0 +1,7 @@
+[submodule "pifuhd"]
+	path = pifuhd
+	url = https://github.com/facebookresearch/pifuhd
+
+[submodule "lhpe"]
+	path = lhpe
+	url = https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch
