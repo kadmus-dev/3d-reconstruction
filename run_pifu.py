@@ -1,9 +1,9 @@
+import argparse
 import torch
 import cv2
 import os
 import numpy as np
 import sys
-import subprocess
 
 # a very filthy hack :)
 sys.path.append('./lhpe/')
@@ -13,6 +13,16 @@ from modules.pose import Pose, track_poses
 from modules.load_state import load_state
 from modules.keypoints import extract_keypoints, group_keypoints
 from models.with_mobilenet import PoseEstimationWithMobileNet
+
+sys.path.append('./pifuhd/')
+from apps.recon import reconWrapper
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', '--input_path', type=str, default='./pifuhd/sample_images/')
+parser.add_argument('-o', '--out_path', type=str, default='./results')
+args = parser.parse_args()
+
 
 def get_rect(net, images, height_size):
     net = net.eval()
@@ -89,10 +99,6 @@ def get_rect(net, images, height_size):
 image_path = './pifuhd/sample_images/test.png'  # example image
 image_dir = os.path.dirname(image_path)
 file_name = os.path.splitext(os.path.basename(image_path))[0]
-obj_path = './pifuhd/results/pifuhd_final/recon/result_%s_256.obj' % file_name
-out_img_path = './pifuhd/results/pifuhd_final/recon/result_%s_256.png' % file_name
-video_path = './pifuhd/results/pifuhd_final/recon/result_%s_256.mp4' % file_name
-video_display_path = './pifuhd/results/pifuhd_final/result_%s_256_display.mp4' % file_name
 
 print('getting rect')
 net = PoseEstimationWithMobileNet()
@@ -104,14 +110,9 @@ get_rect(net.cuda(), [image_path], 512)
 print('got rect')
 
 
-
-
-
 # after i wrote this line there is nothing holy for me. i can finally kill god.
 print('running pifuhd')
-sys.path.append('./pifuhd/')
-from apps.recon import reconWrapper
-cmd = ['--dataroot', './pifuhd/sample_images/', '--results_path', './results/',\
+cmd = ['--dataroot', args.input_path, '--results_path', args.out_path,\
        '--loadSize', '1024', '--resolution', '256', '--load_netMR_checkpoint_path', \
        './pifuhd/checkpoints/pifuhd.pt',\
        '--start_id', '-1', '--end_id', '-1']
