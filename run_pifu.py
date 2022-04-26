@@ -4,6 +4,7 @@ import cv2
 import os
 import numpy as np
 import sys
+import glob
 
 # a very filthy hack :)
 sys.path.append('./lhpe/')
@@ -96,9 +97,12 @@ def get_rect(net, images, height_size):
         np.savetxt(rect_path, np.array(rects), fmt='%d')
 
 
-image_path = './pifuhd/sample_images/test.png'  # example image
-image_dir = os.path.dirname(image_path)
-file_name = os.path.splitext(os.path.basename(image_path))[0]
+img_ext = ['png', 'jpg', 'jpeg']
+image_dir = args.input_path
+file_name = sum([glob.glob(image_dir + '*.' + e) for e in img_ext], [])
+# print(f"{img_ext}\t{image_dir}\t{file_name}")
+image_path = file_name[0]
+
 
 print('getting rect')
 net = PoseEstimationWithMobileNet()
