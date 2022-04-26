@@ -3,6 +3,9 @@ import os
 import pathlib as pt
 import sys
 
+# hack from savitsky)
+sys.path.append('./3DDFA_V2')
+
 import cv2
 import yaml
 from FaceBoxes import FaceBoxes
@@ -10,10 +13,6 @@ from TDDFA import TDDFA
 from utils.functions import get_suffix
 from utils.serialization import ser_to_obj
 from utils.serialization import ser_to_ply
-
-# hack from savitsky)
-sys.path.append('./3DDFA_V2')
-
 
 def main(args):
     input_path = pt.Path(args.input_path).resolve()
