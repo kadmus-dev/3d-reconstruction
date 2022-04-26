@@ -1,5 +1,6 @@
 import os
 import subprocess
+import zipfile
 
 import wget
 
@@ -19,3 +20,11 @@ else:
 
 os.chdir("./3DDFA_V2")
 subprocess.run(['sh', './build.sh'])
+
+if not os.path.exists('realesrgan-ncnn-vulkan-20220424-ubuntu.zip'):
+    wget.download("https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesrgan-ncnn-vulkan-20220424-ubuntu.zip")
+    with zipfile.ZipFile('realesrgan-ncnn-vulkan-20220424-ubuntu.zip', 'r') as zip_ref:
+        zip_ref.extractall('esrgan')
+    os.chmod('esrgan/realesrgan', 0o777)
+else:
+    print('realesrgan-ncnn-vulkan-20220424-ubuntu.zip already exists')
