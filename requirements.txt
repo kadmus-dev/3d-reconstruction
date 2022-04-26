@@ -1,14 +1,21 @@
-wheel
-wget
-matplotlib
 -r lhpe/requirements.txt
+argparse
+ffmpeg
+gradio
+imageio
+imageio-ffmpeg
+matplotlib
+matplotlib
+opencv-python         # cv2
+Pillow                # PIL
+PyOpenGL
+pyyaml # yaml
+scikit-image==0.18.3  #skimage
+scipy
 # -r pifuhd/requirements.txt
 torch
 torchvision
-Pillow                # PIL
-scikit-image==0.18.3  #skimage
 tqdm
-opencv-python         # cv2
 trimesh
-PyOpenGL
-ffmpeg
+wget
+wheel
