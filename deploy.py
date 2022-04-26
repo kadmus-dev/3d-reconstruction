@@ -18,15 +18,17 @@ if not os.path.exists('pifuhd/checkpoints/pifuhd.pt'):
     subprocess.run(['sh', './scripts/download_trained_model.sh'])
 else:
     print('pifuhd.pt already exists')
+# os.chdir("..")
 
 os.chdir("./3DDFA_V2")
 subprocess.run(['sh', './build.sh'])
+os.chdir("..")
 
 if not os.path.exists('realesrgan-ncnn-vulkan-20220424-ubuntu.zip'):
     wget.download("https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesrgan-ncnn-vulkan-20220424-ubuntu.zip")
     with zipfile.ZipFile('realesrgan-ncnn-vulkan-20220424-ubuntu.zip', 'r') as zip_ref:
         zip_ref.extractall('esrgan')
-    os.chmod('esrgan/realesrgan', 0o777)
+    os.chmod('esrgan/realesrgan/', 0o777)
 else:
     print('realesrgan-ncnn-vulkan-20220424-ubuntu.zip already exists')
 
