@@ -12,3 +12,10 @@ opencv-python         # cv2
 trimesh
 PyOpenGL
 ffmpeg
+matplotlib
+imageio
+imageio-ffmpeg
+pyyaml # yaml
+argparse
+scipy
+gradio
