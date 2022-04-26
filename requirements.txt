@@ -1,5 +1,6 @@
 wheel
 wget
+gdown
 matplotlib
 -r lhpe/requirements.txt
 # -r pifuhd/requirements.txt

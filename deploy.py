@@ -1,5 +1,6 @@
 import wget
 import os
+import gdown
 import subprocess
 
 if not os.path.exists('lhpe/checkpoint_iter_370000.pth'):
@@ -15,3 +16,15 @@ if not os.path.exists('pifuhd/checkpoints/pifuhd.pt'):
     subprocess.run(['sh', './scripts/download_trained_model.sh'])
 else:
     print('pifuhd.pt already exists')
+
+
+# if not os.path.exists('GFM/models/pretrained/'):
+if not os.path.exists('GFM/models/'):
+    os.mkdir('GFM/models/')
+    
+if not os.path.exists('GFM/models/pretrained/'):
+    os.mkdir('GFM/models/pretrained/')
+
+url = "https://drive.google.com/uc?export=download&id=1AdtoIdYTLsjXfVe_a50tin0cFwZMSz93"
+if not os.path.exists('GFM/models/pretrained/gfm_r34_tt.pth'):
+    gdown.download(url, 'GFM/models/pretrained/gfm_r34_tt.pth', quiet=False)
