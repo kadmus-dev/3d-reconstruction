@@ -1,4 +1,5 @@
 import os
+import gdown
 import subprocess
 import zipfile
 
@@ -28,3 +29,14 @@ if not os.path.exists('realesrgan-ncnn-vulkan-20220424-ubuntu.zip'):
     os.chmod('esrgan/realesrgan', 0o777)
 else:
     print('realesrgan-ncnn-vulkan-20220424-ubuntu.zip already exists')
+
+# if not os.path.exists('GFM/models/pretrained/'):
+if not os.path.exists('GFM/models/'):
+    os.mkdir('GFM/models/')
+    
+if not os.path.exists('GFM/models/pretrained/'):
+    os.mkdir('GFM/models/pretrained/')
+
+url = "https://drive.google.com/uc?export=download&id=1AdtoIdYTLsjXfVe_a50tin0cFwZMSz93"
+if not os.path.exists('GFM/models/pretrained/gfm_r34_tt.pth'):
+    gdown.download(url, 'GFM/models/pretrained/gfm_r34_tt.pth', quiet=False)

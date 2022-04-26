@@ -1,5 +1,6 @@
 wheel
 wget
+gdown
 matplotlib
 -r lhpe/requirements.txt
 # -r pifuhd/requirements.txt
@@ -12,10 +13,8 @@ opencv-python         # cv2
 trimesh
 PyOpenGL
 ffmpeg
-matplotlib
 imageio
 imageio-ffmpeg
-pyyaml # yaml
-argparse
-scipy
+pyyaml
 gradio
+Pillow==8.0.0
