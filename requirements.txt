@@ -12,3 +12,5 @@ opencv-python         # cv2
 trimesh
 PyOpenGL
 ffmpeg
+# -r GFM/requirements.txt
+Pillow==8.0.0
