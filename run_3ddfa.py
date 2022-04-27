@@ -35,9 +35,10 @@ def main(args):
         # Detect faces, get 3DMM params and roi boxes
         boxes = face_boxes(img)
         n = len(boxes)
-        if n == 0:
-            print(f'No face detected, exit')
-            sys.exit(-1)
+        #if n == 0:
+        #    print(f'No face detected, exit')
+        #    os.chdir("..")
+        #    sys.exit(-1)
         print(f'Detect {n} faces')
 
         param_lst, roi_box_lst = tddfa(img, boxes)
@@ -47,13 +48,14 @@ def main(args):
         name = img_path.name.replace(old_suffix, "")
 
         wfp = output_path.joinpath(name)
-        wfp.mkdir(exist_ok=True)
-        wfp = wfp.joinpath(name)
+        #wfp.mkdir(exist_ok=True)
+        #wfp = wfp.joinpath(name)
 
         ver_lst = tddfa.recon_vers(param_lst, roi_box_lst, dense_flag=True)
 
         ser_to_ply(ver_lst, tddfa.tri, height=img.shape[0], wfp=f"{wfp}.ply")
         ser_to_obj(img, ver_lst, tddfa.tri, height=img.shape[0], wfp=f"{wfp}.obj")
+    os.chdir("..")
 
 
 if __name__ == '__main__':

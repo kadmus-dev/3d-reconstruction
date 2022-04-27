@@ -2,15 +2,19 @@ import io
 import os
 import subprocess as sb
 from typing import Union
+from itertools import filterfalse
+from shlex import split
 
 import streamlit as st
 import streamlit.components.v1 as components
 from PIL import Image
 from obj2html import obj2html
-from pathlib import Path
+import pathlib as pt
 
+import runner
 
-
+def filter_hidden(seq):
+    yield from filterfalse(lambda x: x.name.startswith("."), seq)
 
 def main():
     st.title("3D Реконструкция")
@@ -19,25 +23,29 @@ def main():
     image_bytes = st.sidebar.file_uploader("Загрузить изображение",
                                            type=["png", "jpg", "jpeg"])
 
-    data_dir = os.path.abspath('data')
-    result_dir = os.path.abspath('result')
+    data_dir = pt.Path("./data")
+    result_dir = pt.Path("./results")
 
+    data_dir.mkdir(exist_ok=True)
+    result_dir.mkdir(exist_ok=True)
 
     if image_bytes is not None:
 
+        for file in filter_hidden(data_dir.iterdir()):
+            file.unlink()
+        for file in filter_hidden(result_dir.iterdir()):
+            file.unlink()
+
         img_name = image_bytes.name
         img = load_image(image_bytes)
-        img.save(os.path.join(data_dir, img_name))  # Put loaded image into folder data
+        img.save(data_dir.joinpath(img_name))  # Put loaded image into folder data
 
         st.sidebar.image(img)
 
-
-        # RUN PIPELINE
-        # todo
-
+        runner.run(data_dir, result_dir, selected_mode)
 
         # make window with interactive 3d model
-        paths = Path(result_dir).glob("*.obj")
+        paths = result_dir.glob("*.obj")
         obj_file_path = next(paths)
         html_string = obj2html(obj_file_path, html_elements_only=True)
         components.html(html_string)
@@ -57,8 +65,8 @@ def main():
         st.video(video_bytes, format="video/mp4", start_time=0)
 
 
-def make_video(obj_file_path: Union[str, Path], render_width: int, render_height: int) -> str:
-    sb.run(['python', f'-m pifuhd.apps.render_turntable -f {obj_file_path} -ww {render_width} -hh {render_height}'])
+def make_video(obj_file_path: Union[str, pt.Path], render_width: int, render_height: int) -> str:
+    sb.run(split(f'python -m pifuhd.apps.render_turntable, -f {obj_file_path} -ww {render_width} -hh {render_height}'))
     # тут надо достать видео, но я не смог сгенерить
     return 'tuc_pizza.mp4'
 

@@ -4,6 +4,8 @@ from shlex import split
 import os
 import argparse
 
+import cv2
+
 def main(args):
     esrgan = pt.Path("./esrgan/realesrgan-ncnn-vulkan")
     gfm_input = pt.Path("./GFM/samples/original")
@@ -24,7 +26,10 @@ def main(args):
         file.unlink()
 
     for file in gfm_output.iterdir():
-        file.rename(pt.Path(args.output_path).joinpath(file.name))
+        image = cv2.imread(str(file))
+        cv2.imwrite(str(pt.Path(args.output_path).joinpath(file.name)).replace(".png", ".jpg"),
+            image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+        #file.rename(pt.Path(args.output_path).joinpath(file.name))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='The preprocessing pipeline')
