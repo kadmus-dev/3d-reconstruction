@@ -19,3 +19,6 @@ imageio-ffmpeg
 pyyaml
 gradio
 Pillow==8.0.0
+matplotlib
+streamlit
+obj2html

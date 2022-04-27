@@ -5,6 +5,7 @@ import os
 import numpy as np
 import sys
 import glob
+import pathlib as pt
 
 # a very filthy hack :)
 sys.path.append('./lhpe/')
@@ -94,14 +95,16 @@ def get_rect(net, images, height_size):
 def main(args):
     img_ext = ['png', 'jpg', 'jpeg']
     image_dir = args.input_path
-    file_name = sum([glob.glob(image_dir + '*.' + e) for e in img_ext], [])
+    # for file in next(pt.Path(image_dir).iterdir()):
+    #    print(file)
+    # file_name = sum([glob.glob(image_dir + '*.' + e) for e in img_ext], [])
     # print(f"{img_ext}\t{image_dir}\t{file_name}")
-    image_path = file_name[0]
+    image_path = str(next(pt.Path(image_dir).iterdir())) #file_name[0]
 
     print('getting rect')
     net = PoseEstimationWithMobileNet()
     checkpoint = torch.load(
-        './lhpe/checkpoint_iter_370000.pth', map_location='cpu')
+        './lhpe/checkpoint_iter_370000.pth', map_location='cuda')
     load_state(net, checkpoint)
 
     get_rect(net.cuda(), [image_path], 512)
@@ -109,8 +112,17 @@ def main(args):
 
     # after i wrote this line there is nothing holy for me. i can finally kill god.
     print('running pifuhd')
-    cmd = ['--dataroot', args.input_path, '--results_path', args.out_path, \
+    cmd = ['--dataroot', args.input_path, '--results_path', args.output_path, \
            '--loadSize', '1024', '--resolution', '256', '--load_netMR_checkpoint_path', \
            './pifuhd/checkpoints/pifuhd.pt', \
            '--start_id', '-1', '--end_id', '-1']
     reconWrapper(cmd, True)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input_path', type=str, default='./pifuhd/sample_images/')
+    parser.add_argument('-o', '--output_path', type=str, default='./results')
+    args = parser.parse_args()
+
+    main(args)
