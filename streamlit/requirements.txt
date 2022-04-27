@@ -1,3 +1,0 @@
-streamlit==1.8.1
-pillow==8.4.0
-obj2html==0.14
