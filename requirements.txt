@@ -2,6 +2,7 @@ wheel
 wget
 gdown
 matplotlib
+numpy==1.22.3
 -r lhpe/requirements.txt
 # -r pifuhd/requirements.txt
 torch
