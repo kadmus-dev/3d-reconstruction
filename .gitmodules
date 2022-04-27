@@ -5,3 +5,10 @@
 [submodule "lhpe"]
 	path = lhpe
 	url = https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch
+
+[submodule "3DDFA_V2"]
+	path = 3DDFA_V2
+	url = https://github.com/cleardusk/3DDFA_V2
+[submodule "GFM"]
+	path = GFM
+	url = https://github.com/JizhiziLi/GFM.git

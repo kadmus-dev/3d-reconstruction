@@ -21,3 +21,9 @@ pip install cython
 pip install numpy
 pip install -r requirements.txt
 ```
+
+## How to run 3DDFA_V2
+Script will be runned on all the files inside input_directory and will output results to output_directory
+```bash
+python run_3ddfa.py -i {input_directory} -o {output_directory}
+```
