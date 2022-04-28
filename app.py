@@ -18,7 +18,7 @@ def filter_hidden(seq):
 
 def main():
     st.title("3D Реконструкция")
-    selected_mode = st.sidebar.radio("Выбирете режим", ['Face', 'Pose'])
+    selected_mode = st.sidebar.radio("Выберите режим", ['Face', 'Pose'])
 
     image_bytes = st.sidebar.file_uploader("Загрузить изображение",
                                            type=["png", "jpg", "jpeg"])
