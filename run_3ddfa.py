@@ -13,6 +13,8 @@ from TDDFA import TDDFA
 from utils.functions import get_suffix
 from utils.serialization import ser_to_obj
 from utils.serialization import ser_to_ply
+from utils.uv import uv_tex
+from utils.functions import draw_landmarks
 
 def main(args):
     input_path = pt.Path(args.input_path).resolve()
@@ -52,7 +54,9 @@ def main(args):
         #wfp = wfp.joinpath(name)
 
         ver_lst = tddfa.recon_vers(param_lst, roi_box_lst, dense_flag=True)
-
+    
+        draw_landmarks(img, ver_lst, show_flag=False, dense_flag=True, wfp=f"{wfp}_2d.jpg")
+        uv_tex(img, ver_lst, tddfa.tri, show_flag=False, wfp=f"{wfp}_uv.jpg")
         ser_to_ply(ver_lst, tddfa.tri, height=img.shape[0], wfp=f"{wfp}.ply")
         ser_to_obj(img, ver_lst, tddfa.tri, height=img.shape[0], wfp=f"{wfp}.obj")
     os.chdir("..")

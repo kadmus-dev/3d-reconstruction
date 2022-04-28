@@ -7,6 +7,7 @@ from shlex import split
 #import run_pifu
 import run_prep
 import run_3ddfa
+import time
 
 
 class IOargs():
@@ -16,6 +17,7 @@ class IOargs():
 
 
 def run(input, output, mode):
+    start = time.time()
     data = pt.Path(input)
     result = pt.Path(output)
     #prep = pt.Path("./prep")
@@ -35,7 +37,7 @@ def run(input, output, mode):
             print('Running 3ddfa')
             run_3ddfa.main(IOargs(prep, result))
 
-
+    print(time.time() - start)
 
 
 def main(args):
