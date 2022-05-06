@@ -1,6 +1,10 @@
 # 3d-reconstruction
 
+This ensamble is used to reconstruct 3d shapes of people from photos.
+![](imgs/pipeline.png)
 
+This repo also contains a streamlit application That can be used to run the pipeline.
+![](imgs/streamlit.jpg)
 ## Cloning
 
 To clone this repository AND its submodules - run the following command:
@@ -14,6 +18,12 @@ git submodule init
 git submodule update
 ```
 
+## Download models
+To download models, simply run
+```bash
+python3 deploy.py
+```
+
 ## Dependencies
 Because of pip quirks - to install with thw following command:
 ```bash
@@ -25,5 +35,17 @@ pip install -r requirements.txt
 ## How to run 3DDFA_V2
 Script will be runned on all the files inside input_directory and will output results to output_directory
 ```bash
+python run_pifu.py -i {input_directory} -o {output_directory}
+```
+
+## How to run 3DDFA_V2
+Script will be runned on all the files inside input_directory and will output results to output_directory
+```bash
 python run_3ddfa.py -i {input_directory} -o {output_directory}
 ```
+
+## How to run streamlit application
+```
+streamlit run app.py
+```
+More docs on streamlit [here](https://docs.streamlit.io/library/get-started)
