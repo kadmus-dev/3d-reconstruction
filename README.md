@@ -1,10 +1,10 @@
 # 3D Reconstruction
 
-Person's 2D to 3D shapes reconstruction.  
+Person's 2D to 3D shapes reconstruction
 
 ![](imgs/pipeline.png)
 
-### Cloning
+### Setup
 
 To clone this repository and its submodules, run the following command:
 ```bash
@@ -17,14 +17,12 @@ git submodule init
 git submodule update
 ```
 
-### Downloading models
-To download models, simply run
+To download models, run:
 ```bash
 python3 deploy.py
 ```
 
-### Installing dependencies
-Because of pip quirks - to install with thw following command:
+To install dependencies, run:
 ```bash
 pip install cython
 pip install numpy
@@ -33,6 +31,7 @@ pip install -r requirements.txt
 
 ### Application
 
+To start an application for user IO + 3D preview, run:
 ```
 streamlit run app.py
 ```
